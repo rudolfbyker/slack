@@ -28,8 +28,6 @@ jobs:
       
       - name: Build and push the image
         run: |
-          # Try to support all platforms supported by the base image.
-          # Run `docker buildx imagetools inspect image-name` to see the supported platforms.
           TAG_LATEST="${{ vars.DOCKER_IMAGE_NAME }}:latest"
           TAG_COMMIT="${{ vars.DOCKER_IMAGE_NAME }}:${{ github.ref_name }}"
-          docker buildx build --platform linux/amd64,linux/arm64 -t $TAG_LATEST -t $TAG_COMMIT --push .
+          docker buildx build --platform linux/amd64 -t $TAG_LATEST -t $TAG_COMMIT --push .
